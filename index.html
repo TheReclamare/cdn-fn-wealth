@@ -18,7 +18,6 @@
             --border: #dee2e6;
             --hover: #f1f3f4;
             
-            /* Table color scheme */
             --col-name: #1a1a1a;
             --col-year: #6a6a6a;
             --col-financial: #2d2d2d;
@@ -87,6 +86,60 @@
             text-align: center;
         }
         
+        .top-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .action-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+            flex: 1;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            background: var(--accent);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .link-btn:hover { background: #6d1a28; text-decoration: none; color: #ffffff; }
+        
+        .link-btn.secondary {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        
+        .link-btn.secondary:hover { background: var(--hover); color: var(--text); }
+        
         .search-container {
             margin-bottom: 16px;
         }
@@ -149,7 +202,6 @@
         th.number { text-align: right; padding-right: 16px; }
         th.center { text-align: center; }
         
-        /* Column header colors to match data */
         th[data-sort="name"] { color: var(--col-name); }
         th[data-sort="year"] { color: var(--col-year); }
         th[data-sort="cash"], th[data-sort="surplus"] { color: var(--col-financial); }
@@ -163,7 +215,6 @@
             font-size: 0.8rem;
         }
         
-        /* Name column - bold black */
         td.col-name {
             font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 600;
@@ -171,26 +222,22 @@
             padding-left: 16px;
         }
         
-        /* Year column - muted, centered */
         td.col-year {
             color: var(--col-year);
             text-align: center;
         }
         
-        /* Financial columns - dark gray */
         td.col-financial {
             color: var(--col-financial);
             text-align: right;
         }
         
-        /* Population column - accent red */
         td.col-population {
             color: var(--col-population);
             font-weight: 500;
             text-align: right;
         }
         
-        /* Per capita columns - medium gray */
         td.col-percapita {
             color: var(--col-percapita);
             text-align: right;
@@ -224,41 +271,6 @@
             margin-left: 20px;
         }
         
-        .footer-section a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        
-        .footer-section a:hover { text-decoration: underline; }
-        
-        .links-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 12px;
-        }
-        
-        .link-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .link-btn:hover { background: #6d1a28; text-decoration: none; }
-        
-        .link-btn.secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-        
-        .link-btn.secondary:hover { background: var(--hover); }
-        
         footer {
             text-align: center;
             font-size: 0.8rem;
@@ -267,11 +279,16 @@
             border-top: 1px solid var(--border);
         }
         
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        
         @media (max-width: 768px) {
             .container { padding: 16px 12px; }
             h1 { font-size: 1.4rem; }
             th, td { padding: 8px 6px; font-size: 0.75rem; }
             td { font-size: 0.7rem; }
+            .top-actions { flex-direction: column; }
+            .action-box { min-width: auto; }
         }
     </style>
 </head>
@@ -291,6 +308,22 @@
         
         <div class="scope-notice">
             <strong>Scope:</strong> This dataset includes 575 First Nations bands with publicly available financial statements. This is not a complete census of all First Nations in Canada.
+        </div>
+        
+        <div class="top-actions">
+            <div class="action-box">
+                <p><strong>Download Data</strong></p>
+                <div class="action-buttons">
+                    <a href="https://mega.nz/folder/QYUwQLIY#hwPnNm8C15El4aI6EzU6IQ" target="_blank" class="link-btn">📄 Source PDFs</a>
+                    <a href="data/FN_Financial_Data.xlsx" download class="link-btn secondary">📊 Excel Data</a>
+                </div>
+            </div>
+            <div class="action-box">
+                <p><strong>Related Project</strong></p>
+                <div class="action-buttons">
+                    <a href="https://thereclamare.github.io/CDN_Govt_Spending/" target="_blank" class="link-btn secondary">CDN Government Spending 2015–2025 →</a>
+                </div>
+            </div>
         </div>
         
         <div class="search-container">
@@ -318,22 +351,6 @@
         <div class="footer-section">
             <h3>What is Accumulated Surplus?</h3>
             <p>Accumulated Surplus is essentially <strong>Net Equity: Assets minus Liabilities</strong>. It represents the band's total financial position built up over time.</p>
-        </div>
-        
-        <div class="footer-section">
-            <h3>Data Sources & Downloads</h3>
-            <p>Data was manually compiled from publicly available First Nations financial statements.</p>
-            <div class="links-row">
-                <a href="https://mega.nz/folder/QYUwQLIY#hwPnNm8C15El4aI6EzU6IQ" target="_blank" class="link-btn">📄 Source Financial Statements (Mega)</a>
-                <a href="data/FN_Financial_Data.xlsx" download class="link-btn secondary">📊 Download Excel Data</a>
-            </div>
-        </div>
-        
-        <div class="footer-section">
-            <h3>Related Projects</h3>
-            <div class="links-row">
-                <a href="https://thereclamare.github.io/CDN_Govt_Spending/" target="_blank" class="link-btn secondary">Canadian Government Spending 2015–2025 →</a>
-            </div>
         </div>
         
         <div class="footer-section">
@@ -437,7 +454,6 @@
             sortData(currentSort.column);
         }
         
-        // Event listeners
         document.querySelectorAll('th[data-sort]').forEach(header => {
             header.addEventListener('click', () => sortData(header.dataset.sort));
         });
@@ -446,7 +462,6 @@
             filterData(e.target.value);
         });
         
-        // Initial render
         sortData('name');
     </script>
 </body>
