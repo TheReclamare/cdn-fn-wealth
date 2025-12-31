@@ -1,6 +1,6 @@
 # Canadian First Nations Financial Data
 
-Aggregated public financial data from **576 First Nations bands** in Canada, compiled from publicly available financial statements.
+Aggregated public financial data from **575 First Nations bands** in Canada, compiled from publicly available financial statements.
 
 🔗 **Live Site:** [https://thereclamare.github.io/cdn-fn-wealth/](https://thereclamare.github.io/cdn-fn-wealth/)
 
@@ -8,7 +8,7 @@ Aggregated public financial data from **576 First Nations bands** in Canada, com
 
 - **$10.6 billion** total cash holdings
 - **$43.7 billion** accumulated surplus
-- **438,721** on-reserve population covered
+- **437,245** on-reserve population covered
 - Per capita calculations
 - Searchable, sortable table interface
 
