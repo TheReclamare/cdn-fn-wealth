@@ -144,20 +144,58 @@
             margin-bottom: 16px;
         }
         
+        .search-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
         .search-input {
-            width: 100%;
-            max-width: 400px;
             padding: 10px 16px;
             font-size: 0.95rem;
             font-family: inherit;
             border: 2px solid var(--border);
             border-radius: 6px;
             background: var(--bg-card);
+            width: 300px;
+            max-width: 100%;
         }
         
         .search-input:focus {
             outline: none;
             border-color: var(--accent);
+        }
+        
+        .search-btn {
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            font-weight: 500;
+            background: var(--accent);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .search-btn:hover {
+            background: #6d1a28;
+        }
+        
+        .clear-btn {
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .clear-btn:hover {
+            background: var(--hover);
         }
         
         .results-count {
@@ -289,6 +327,7 @@
             td { font-size: 0.7rem; }
             .top-actions { flex-direction: column; }
             .action-box { min-width: auto; }
+            .search-input { width: 100%; }
         }
     </style>
 </head>
@@ -327,7 +366,11 @@
         </div>
         
         <div class="search-container">
-            <input type="text" class="search-input" id="search" placeholder="Search by band name..." autocomplete="off">
+            <div class="search-form">
+                <input type="text" class="search-input" id="search" placeholder="Enter band name..." autocomplete="off">
+                <button class="search-btn" id="searchBtn">Search</button>
+                <button class="clear-btn" id="clearBtn">Clear</button>
+            </div>
             <div class="results-count" id="resultsCount">Showing all 575 bands. Click column headers to sort.</div>
         </div>
         
@@ -442,8 +485,8 @@
             renderTable();
         }
         
-        function filterData(query) {
-            query = query.toLowerCase().trim();
+        function doSearch() {
+            const query = document.getElementById('search').value.toLowerCase().trim();
             if (!query) {
                 filteredData = [...data];
             } else {
@@ -454,14 +497,28 @@
             sortData(currentSort.column);
         }
         
+        function clearSearch() {
+            document.getElementById('search').value = '';
+            filteredData = [...data];
+            sortData(currentSort.column);
+        }
+        
+        // Event listeners
         document.querySelectorAll('th[data-sort]').forEach(header => {
             header.addEventListener('click', () => sortData(header.dataset.sort));
         });
         
-        document.getElementById('search').addEventListener('input', (e) => {
-            filterData(e.target.value);
+        document.getElementById('searchBtn').addEventListener('click', doSearch);
+        document.getElementById('clearBtn').addEventListener('click', clearSearch);
+        
+        // Allow Enter key to trigger search
+        document.getElementById('search').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                doSearch();
+            }
         });
         
+        // Initial render
         sortData('name');
     </script>
 </body>
